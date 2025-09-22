@@ -9,36 +9,43 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        //입력받을 문자열 갯수
         int n = Integer.parseInt(br.readLine());
         int last = -1;
 
-        //큐 정의
         Queue<Integer> queue = new LinkedList<>();
 
-        for(int i = 0; i<n; i++){
+        for (int i = 0; i < n; i++) {
             String line = br.readLine();
-            if(line.startsWith("push")){
-                //offer : 큐에서 주어진 값을 넣는 명령어
-                int val = Integer.parseInt(line.substring(5).trim());
-                queue.offer(val);
-                last = val; //마지막 값 갱신
-            }else if(line.equals("pop")){
-                //poll : 큐에서 값 하나를 출력하고 그 값을 큐에서 제거
-                sb.append(queue.isEmpty()? -1 : queue.poll()).append('\n');
-            }else if(line.equals("size")){
-                //size : 큐에 들어있는 데이터의 개수 출력
-                sb.append(queue.size()).append('\n');
-            }else if(line.equals("empty")){
-                //isEmpty : 큐가 비어있는지 확인. 비어있으면 true
-                sb.append(queue.isEmpty() ? 1 : 0).append('\n');
-            }else if(line.equals("front")){
-                //peek : 큐에서 값 하나 출력 제거는 안함.
-                sb.append(queue.isEmpty()? -1 : queue.peek()).append('\n');
-            }else if(line.equals("back")){
-                sb.append(queue.isEmpty()? -1 : last).append('\n');
+
+            switch (line.charAt(0)) {
+                case 'p': // push or pop
+                    // "push X" 또는 "pop"
+                    if (line.charAt(1) == 'u') { // "push"
+                        int val = Integer.parseInt(line.substring(5)); // "push " 이후 숫자
+                        queue.offer(val);
+                        last = val;
+                    } else { // "pop"
+                        sb.append(queue.isEmpty() ? -1 : queue.poll()).append('\n');
+                    }
+                    break;
+                case 's': // size
+                    sb.append(queue.size()).append('\n');
+                    break;
+                case 'e': // empty
+                    sb.append(queue.isEmpty() ? 1 : 0).append('\n');
+                    break;
+                case 'f': // front
+                    sb.append(queue.isEmpty() ? -1 : queue.peek()).append('\n');
+                    break;
+                case 'b': // back
+                    sb.append(queue.isEmpty() ? -1 : last).append('\n');
+                    break;
+                default:
+                    // (입력 포맷이 정해져 있으므로 도달하지 않음)
+                    break;
             }
         }
-        System.out.println(sb.toString());
+
+        System.out.print(sb.toString());
     }
 }
