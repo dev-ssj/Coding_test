@@ -1,18 +1,20 @@
 import java.util.*;
 class Solution {
     public int[] solution(int[] arr) {
-        List<Integer> list = new ArrayList<>();
-        int prev = -1;
+        Stack<Integer> stack = new Stack<>();
 
-        for (int x : arr) {
-            if (x != prev) {
-                list.add(x);
-                prev = x;
+        for (int i : arr) {
+            if (stack.empty() || !stack.peek().equals(i)) {
+                stack.push(i);
             }
         }
 
-        int[] ans = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) ans[i] = list.get(i);
-        return ans;
+        //남은 스택 사이즈 만큼 배열 생성 & 배열에 값 저장
+        int n = stack.size();
+        int[] answer = new int[n];
+        for (int i = 0; i < n; i++) {
+            answer[i] = stack.get(i);
+        }
+        return answer;
     }
 }
