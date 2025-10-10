@@ -1,40 +1,42 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
-/**
- * @author : 선순주
- * @packageName :
- * @fileName : ${NAME}
- * @date : 2025-09-15
- * @description : ${DESCRIPTION}
-*/
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
 
-        //과목 갯수
-        int n = sc.nextInt();
-        //점수 받을 배열
-        double score[] = new double[n];
-        //평균, 높은 점수, 합 변수
-        double avg = 0, max = 0, sum = 0;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
-        //배열 길이 만큼 for문 실행하여 점수 받은 후 제일 높은 점수 판별
-        for(int i=0;i< score.length;i++){
-            score[i] = sc.nextInt();
+        //첫줄 : 과목 개수
+        int N = Integer.parseInt(br.readLine());
 
-            if(score[i]>max) {
+        //두번째 줄 : 점수들(공백으로 구분)
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        //최댓값을 저장할 변수
+        int max = 0;
+
+        //점수를 저장할 배열
+        int[] score = new int[N];
+
+        //각 배열 인덱스에 점수 넣기 + 최댓값 찾기
+        for(int i=0; i<N; i++){
+            score[i] = Integer.parseInt(st.nextToken());
+            if(score[i] > max){
                 max = score[i];
             }
         }
-        
-        //제일 높은 점수로 각 점수들 나누기 *100
-        for(int i=0; i<score.length; i++){
-            sum += (score[i]/max)*100;
-        }
-        sc.close();
 
-        //평균값 구하기
-        avg = sum / n;
+        double sum = 0.0;
+        for(int i = 0; i<N; i++){
+            sum += ((double) score[i] /max) * 100;
+        }
+
+        double avg = sum / N;
+
+        //출력
         System.out.println(avg);
 
     }
