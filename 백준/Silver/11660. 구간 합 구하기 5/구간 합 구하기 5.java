@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         //N : 배열 크기, M : 질의 갯수
@@ -42,7 +43,8 @@ public class Main {
 
             //구간 합 배열로 질의 계산 하기
             int result = D[x2][y2] - D[x1-1][y2] - D[x2][y1-1] + D[x1-1][y1-1];
-            System.out.println(result);
+            sb.append(result).append('\n');
         }
+        System.out.println(sb.toString());
     }
 }
