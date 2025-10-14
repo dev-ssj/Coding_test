@@ -46,12 +46,11 @@ public class Main {
             Result++;
 
         // 슬라이딩 윈도우 처리 부분
-        //end : 한칸씩 오른쪽으로 옮기면서 추가할 부분(end_index라고 생각하면됨)
-        //start : 한칸씩 오른쪽으로 옮기면서 삭제할 부분(start_index)
-        for (int end = P; end < S; end++) { //예시) S가 4, P가 2라면 end는 A[2]의 값을 추가하고, start는 2-2=0 으로 A[0]의 값을 제거한다.
-            int start = end - P;
-            Add(A[end]);
-            Remove(A[start]);
+        int left = 0;   //왼쪽 값
+        int right = P;  //오른쪽 값
+        while(right < S){   //배열 인덱스는 0부터 시작이므로 right < S까지
+            Add(A[right++]);  
+            Remove(A[left++]);  
             if (checkSecret == 4)
                 Result++;
         }
@@ -112,4 +111,5 @@ public class Main {
                 break;
         }
     }
+
 }
